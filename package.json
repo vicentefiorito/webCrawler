@@ -2,10 +2,10 @@
   "name": "webcrawler",
   "version": "1.0.0",
   "description": "A JavaScript application that generates \"internal links\" report for any website on the internet by crawling each page of the site.",
-  "main": "index.js",
+  "main": "main.js",
   "scripts": {
     "start": "node main.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/vicentefiorito/webCrawler/issues"
   },
-  "homepage": "https://github.com/vicentefiorito/webCrawler#readme"
+  "homepage": "https://github.com/vicentefiorito/webCrawler#readme",
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
 }
