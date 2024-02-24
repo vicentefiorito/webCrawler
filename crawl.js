@@ -21,9 +21,14 @@ const getURLSFromHTML = (htmlBody,baseURL) => {
     const aElements = dom.window.document.body.querySelectorAll('a') //this returns an array of all the 'a' tag elements
     // loops throught all the 'a' elements found within the body
     for(aElement of aElements){
-        const path = aElement.getAttribute('href')
-        const url = new URL(path,baseURL)
-        urls.push(url.href)
+        try {
+            const path = aElement.getAttribute('href')
+            const url = new URL(path,baseURL)
+            urls.push(url.href)
+        } catch(err) {
+            console.log(`${err.message}: ${aElement.href}`)
+            continue
+        }
     }
     return urls
 }
