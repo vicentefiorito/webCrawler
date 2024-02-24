@@ -1,5 +1,7 @@
+const {crawlPage} = require('./crawl.js')
+
 // this parses the command line for the website url
-function main() {
+async function main() {
     // if number of arguments is less than 1, print error and exit
     if(process.argv.length < 3){
         console.log('error, starting URL not provided!')
@@ -11,10 +13,13 @@ function main() {
         console.log('error, too many arguments to run!')
         return
     }
-
+    
     // the baseUrl given to the command line is the starting point for the url
     const startUrl = process.argv[2]
     console.log(`Starting the app at: ${startUrl}`)
+
+    // awaiting the result of the page
+    await crawlPage(startUrl)
 }
 
 main()
