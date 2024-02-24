@@ -56,7 +56,7 @@ test('Multiple URLS in body',() => {
 
 test('No URL founded',() => {
     const inputURL = 'https://blog.boot.dev'
-    const inputBody =  '<html><body><span>No href here!></span></body></html>'
+    const inputBody =  '<html><body><span>No href here!></span>9</body></html>'
     const actualURLS = getURLSFromHTML(inputBody,inputURL)
     const expectedURLS = []
     expect(actualURLS).toEqual(expectedURLS)
