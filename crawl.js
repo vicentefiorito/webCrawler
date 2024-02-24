@@ -33,17 +33,38 @@ const getURLSFromHTML = (htmlBody,baseURL) => {
     return urls
 }
 
-// some testing here
-const htmlBody = `<html>
-<body>
-    <a href="https://blog.boot.dev"><span>Go to Boot.dev</span></a>
-</body>
-</html>`
+// this function crawls the page starting from the base url
+async function crawlPage(currUrl) {
+    try{
+        const res = await fetch(currUrl, {
+            method: 'GET',
+            mode:'cors',
+        })
+        // if the status code is an error-level code, print an error and return
+        if(res.status > 399) {
+            console.log('Error Status, cannot run!')
+            return
+        }
+        const contentType = res.headers.get('content-type')
+        // if the 'content-type' is not 'text/html' print an error and return
+        if(!contentType.includes('text/html')) {
+            console.log('Wrong content-type header, cannor run!')
+            return 
+        }
+        console.log(await res.text())
 
-console.log(getURLSFromHTML(htmlBody))
+    } catch(err) {
+        console.log(`${err.message}`)
+    }
+}
+
+// some testing here
+const baseUrl = 'https://wagslane.dev'
+crawlPage(baseUrl)
 
 // exporting the function
 module.exports = {
     normalizeURL,
-    getURLSFromHTML
+    getURLSFromHTML,
+    crawlPage
 }
