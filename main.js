@@ -21,7 +21,9 @@ async function main() {
 
     // awaiting the result of the page
     const pages = await crawlPage(startUrl,startUrl,{})
+    // prints the report in a nice way
     printReport(pages)
 }
+
 
 main()
