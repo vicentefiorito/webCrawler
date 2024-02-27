@@ -62,7 +62,7 @@ async function crawlPage(baseURL,currentURL,pages) {
     }
 
     // performing the crawl
-    console.log(`Starting crawl from: ${currentURL}`)
+    // console.log(`Starting crawl from: ${currentURL}`)
     // this variable will hold the html strint
     let htmlBody = ''
     try{
