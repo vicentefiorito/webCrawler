@@ -34,9 +34,35 @@ const getURLSFromHTML = (htmlBody,baseURL) => {
 }
 
 // this function crawls the page starting from the base url
-async function crawlPage(currUrl) {
+async function crawlPage(baseURL,currentURL,pages) {
+    // if the currentURL and the baseURL are not in the same domain, just return
+    const currentURLObj = new URL(currentURL)
+    const baseURLObj = new URL(baseURL)
+    if(currentURLObj.hostname != baseURLObj.hostname) {
+        return pages
+    }
+
+    // gets a normalized version of the currentURL
+    const normalizedURL = normalizeURL(currentURL)
+
+    // if we've already visited the normalizedURL
+    // increment the count and return the pages
+    if(pages[normalizedURL] > 0){
+        pages[normalizedURL]++
+        return pages
+    }
+
+    // if the normalizedURL does not exits in the pages object
+    // create it and set it to 1 if its not the base url
+    // otherwise set the count to 0
+    if(currentURL === baseURL ) {
+        pages[currentURL] = 0
+    } else {
+        pages[currentURL] = 1
+    }
+    
     try{
-        const res = await fetch(currUrl, {
+        const res = await fetch(currentURL, {
             method: 'GET',
             mode:'cors',
         })
