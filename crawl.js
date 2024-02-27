@@ -60,7 +60,11 @@ async function crawlPage(baseURL,currentURL,pages) {
     } else {
         pages[currentURL] = 1
     }
-    
+
+    // performing the crawl
+    console.log(`Starting crawl from: ${currentURL}`)
+    // this variable will hold the html strint
+    let htmlBody = ''
     try{
         const res = await fetch(currentURL, {
             method: 'GET',
@@ -77,16 +81,23 @@ async function crawlPage(baseURL,currentURL,pages) {
             console.log('Wrong content-type header, cannor run!')
             return 
         }
-        console.log(await res.text())
+        // now changed to represent the string in the page
+        htmlBody = await res.text()
 
     } catch(err) {
         console.log(`${err.message}`)
     }
+    // gets all the urls from a single webpage
+    const urls = getURLSFromHTML(htmlBody,baseURL)
+    for(const url of urls) {
+        pages = await crawlPage(baseURL,url,pages)
+    }
+    return pages
 }
 
 // some testing here
 const baseUrl = 'https://wagslane.dev'
-crawlPage(baseUrl)
+crawlPage(baseUrl,baseUrl,{})
 
 // exporting the function
 module.exports = {
