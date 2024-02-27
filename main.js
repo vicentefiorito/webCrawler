@@ -1,4 +1,5 @@
 const {crawlPage} = require('./crawl.js')
+const {printReport} = require('./report.js')
 
 // this parses the command line for the website url
 async function main() {
@@ -20,7 +21,7 @@ async function main() {
 
     // awaiting the result of the page
     const pages = await crawlPage(startUrl,startUrl,{})
-    console.log(pages)
+    printReport(pages)
 }
 
 main()
