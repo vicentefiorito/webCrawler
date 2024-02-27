@@ -56,9 +56,9 @@ async function crawlPage(baseURL,currentURL,pages) {
     // create it and set it to 1 if its not the base url
     // otherwise set the count to 0
     if(currentURL === baseURL ) {
-        pages[currentURL] = 0
+        pages[normalizedURL] = 0
     } else {
-        pages[currentURL] = 1
+        pages[normalizedURL] = 1
     }
 
     // performing the crawl
@@ -78,7 +78,7 @@ async function crawlPage(baseURL,currentURL,pages) {
         const contentType = res.headers.get('content-type')
         // if the 'content-type' is not 'text/html' print an error and return
         if(!contentType.includes('text/html')) {
-            console.log('Wrong content-type header, cannor run!')
+            console.log('Wrong content-type header, cannot run!')
             return 
         }
         // now changed to represent the string in the page
