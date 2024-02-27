@@ -73,13 +73,13 @@ async function crawlPage(baseURL,currentURL,pages) {
         // if the status code is an error-level code, print an error and return
         if(res.status > 399) {
             console.log('Error Status, cannot run!')
-            return
+            return pages
         }
         const contentType = res.headers.get('content-type')
         // if the 'content-type' is not 'text/html' print an error and return
         if(!contentType.includes('text/html')) {
             console.log('Wrong content-type header, cannot run!')
-            return 
+            return pages
         }
         // now changed to represent the string in the page
         htmlBody = await res.text()
