@@ -19,7 +19,8 @@ async function main() {
     console.log(`Starting the app at: ${startUrl}`)
 
     // awaiting the result of the page
-    await crawlPage(startUrl)
+    const pages = await crawlPage(startUrl,startUrl,{})
+    console.log(pages)
 }
 
 main()
